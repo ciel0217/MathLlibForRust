@@ -100,11 +100,14 @@ impl VectorFunction for Vector4
     }
 
     fn normalize(&mut self) -> Self {
-       self.x /= self.length();
-       self.y /= self.length();
-       self.z /= self.length();
-       self.w /= self.length();
-       Self{x : self.x, y : self.y, z : self.z, w : self.w}
+        
+        let length = self.length();
+        self.x /= length;
+        self.y /= length;
+        self.z /= length;
+        self.w /= length;
+        
+        Self{x : self.x, y : self.y, z : self.z, w : self.w}
     }
 
     fn dot(&self, rhs: &Self) -> f64 {
