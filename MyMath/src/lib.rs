@@ -1,4 +1,5 @@
 #![allow(non_snake_case)]
+mod vector;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
