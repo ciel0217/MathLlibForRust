@@ -203,3 +203,89 @@ impl ops::Mul<Vector3> for f64 {
     }
 }
 
+impl VectorFunction for Vector3
+{
+    fn dot(&self, rhs: &Self) -> f64 {
+        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z
+    }
+
+    fn length(&self) -> f64 {
+        (self.x.powf(2.0) + self.y.powf(2.0) + self.z.powf(2.0)).sqrt()
+    }
+
+    fn normalize(&mut self) -> Self {
+        let length = self.length();
+        Self{x : self.x / length, y : self.y / length, z : self.z / length}
+    }
+}
+
+impl Vector3
+{
+    fn cross(self, rhs : Vector3) -> Vector3
+    {
+        Vector3{
+            x : self.y * rhs.z - self.z * rhs.y,
+            y : -(self.x * rhs.z - self.z * rhs.x),
+            z : self.x * rhs.y - self.y * rhs.x
+        }
+    }
+}
+
+//----------------------------Vector2-------------------------
+
+pub struct Vector2
+{
+    x : f64,
+    y : f64
+}
+
+impl ops::Add<Vector2> for Vector2
+{
+    type Output = Vector2;
+    fn add(self, rhs: Vector2) -> Self::Output {
+        Vector2{x : self.x + rhs.x, y : self.y + rhs.y}
+    }
+}
+
+impl ops::AddAssign<Vector2> for Vector2
+{
+    fn add_assign(&mut self, rhs: Vector2) {
+        self.x = self.x + rhs.x;
+        self.y = self.y + rhs.y;
+    }
+}
+
+impl ops::Sub<Vector2> for Vector2
+{
+    type Output = Vector2;
+
+    fn sub(self, rhs: Vector2) -> Self::Output {
+        Vector2{
+            x : self.x - rhs.x,
+            y : self.y - rhs.y
+        }
+    }
+}
+
+impl ops::SubAssign<Vector2> for Vector2
+{
+    fn sub_assign(&mut self, rhs: Vector2) {
+        self.x = self.x - rhs.x;
+        self.y = self.y - rhs.y;
+    }
+}
+
+impl ops::Mul<Vector2> for Vector2
+{
+    type Output = Vector2;
+
+    fn mul(self, rhs: Vector2) -> Self::Output {
+        Vector2
+        {
+            x : self.x * rhs.x,
+            y : self.y * rhs.y
+        }
+    }
+}
+
+
